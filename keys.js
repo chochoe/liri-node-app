@@ -1,6 +1,7 @@
 // console.log('this is loaded');
 
 var Twitter = require('twitter');
+var Spotify = require('node-spotify-api')
 
 // var twitterKeys = {
 var client = new Twitter ({
@@ -10,40 +11,44 @@ var client = new Twitter ({
   access_token_secret: 'K8HNUB8Y5rWEW4X1OGTi3Eb2pcTFawciv7gXDJ69GdLVt',
 });
 
-var stream = client.stream('statuses/filter', {track: 'javascript'});
-stream.on('data', function(event) {
-  console.log(event && event.text);
-});
- 
-stream.on('error', function(error) {
-  throw error;
+var params = {screen_name: 'chochoe6'};
+client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  if (!error) {
+    console.log(tweets);
+  }
 });
 
-module.exports = twitterKeys;
+client.stream('statuses/filter', {track: 'javascript'}, function(stream) {
+  stream.on('data', function(event) {
+    console.log(event && event.text);
+  });
+ 
+//   stream.on('error', function(error) {
+//     throw error;
+//   });
+});
+
+module.exports = {
+  spotify, client
+}
+
 
 // var spotifyKeys = {
-var spotify = new Spotify({
-	client_id: '51501214c1f543b7849d4a450a99d2bc',
-	clent_secret: '51501214c1f543b7849d4a450a99d2bc',
-});
 
-var Spotify = require('node-spotify-api');
  
-spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
-  if (err) {
-    return console.log('Error occurred: ' + err);
-  }
+// spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
+//   if (err) {
+//     return console.log('Error occurred: ' + err);
+//   }
  
-console.log(data); 
-});
+// console.log(data); 
+// });
 
-spotify
-  .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
-  .then(function(data) {
-    console.log(data); 
-  })
-  .catch(function(err) {
-    console.error('Error occurred: ' + err); 
-  });
-
-module.exports = spotifyKeys;
+// spotify
+//   .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
+//   .then(function(data) {
+//     console.log(data); 
+//   })
+//   .catch(function(err) {
+//     console.error('Error occurred: ' + err); 
+//   });
