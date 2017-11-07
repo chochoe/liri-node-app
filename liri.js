@@ -44,7 +44,7 @@ function myTweets() {
     	};
   	});
 };
-// get myTweets to respond
+// get myTweets to respond (lost working code)
 
 function movieThis() {
 	omdb.search('saw', function(err, movies) {
@@ -67,7 +67,13 @@ function movieThis() {
 // get movieThis to work
 
 function doWhatItSays() {
-
+	fs.readFile("random.txt", "utf8", function(error, data) {
+		if (error) {
+			return console.log(error);
+		}
+		console.log(data);
+		// use text from txt file to run command
+	})
 }
- 
+// get doWhatItSays to work
 };
