@@ -1,7 +1,8 @@
 // console.log('this is loaded');
 
 var Twitter = require('twitter');
-var Spotify = require('node-spotify-api')
+var Spotify = require('node-spotify-api');
+var omdb = require('omdb');
 
 // var twitterKeys = {
 var client = new Twitter ({
@@ -29,7 +30,7 @@ client.stream('statuses/filter', {track: 'javascript'}, function(stream) {
 });
 
 module.exports = {
-  spotify, client
+  spotify, client, 
 }
 
 
