@@ -1,13 +1,8 @@
-// my-tweets
-// spotify-this-song
-// movie-this
-// do-what-it-says
-var Spotify = require('node-spotify-api')
-// const clients = require("./keys");
-// console.log(clients);
-var command = process.argv[2]
-var choice = process.argv[3]
-// console.log(input);
+
+var Spotify = require('node-spotify-api');
+var fs = require("fs");
+var command = process.argv[2];
+var choice = process.argv[3];
 
 var spotify = new Spotify({
 	id: '51501214c1f543b7849d4a450a99d2bc',
@@ -39,6 +34,8 @@ function spotifyThisSong() {
 	  };
 	console.log(data.tracks.items[0]);
 });
+// isolate results to show only artist, song name, preview link, album (if possible)
+// default to "the sign" if no song specified
 
 function myTweets() {
 	client.get("statuses/user_timeline", {screen_name: "chochoe6"}, function(error, tweets, response) {
@@ -47,6 +44,7 @@ function myTweets() {
     	};
   	});
 };
+// get myTweets to respond
 
 function movieThis() {
 	omdb.search('saw', function(err, movies) {
@@ -63,37 +61,13 @@ function movieThis() {
 	    });
 
 	});
-	
+
 }
+
+// get movieThis to work
 
 function doWhatItSays() {
 
 }
  
-// clent.get(path, params, callback);
-// client.post(path, params, callback);
-// client.stream(path, params, callback);
-
-// client.get('statuses/update', {status: 'I Love Twitter'},  function(error, tweet, response) {
-//   if(error) throw error;
-//   console.log(tweets);  // The favorites. 
-//   console.log(response);  // Raw response object. 
-// });
-
-// client.post('statuses/update', {status: 'I Love Twitter'})
-//   .then(function (tweet) {
-//     console.log(tweet);
-//   })
-//   .catch(function (error) {
-//     throw error;
-//   })
-
-// // You can also get the stream in a callback if you prefer. 
-// client.stream('statuses/filter', {track: 'javascript'}, function(stream) {
-//   stream.on('data', function(event) {
-//     console.log(event && event.text);
-//   });
- 
-//   stream.on('error', function(error) {
-//     throw error;
 };
